@@ -1,6 +1,6 @@
 # client
 -cp client
--main Main
+-main Client
 -js public/all.js
 
 --next
@@ -8,5 +8,5 @@
 # server
 -cp server
 -lib nodejs
--main Main
+-main Server
 -js app.js

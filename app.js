@@ -78,9 +78,9 @@ IntIter.prototype = {
 	}
 	,__class__: IntIter
 }
-var Main = function() { }
-Main.__name__ = true;
-Main.main = function() {
+var Server = function() { }
+Server.__name__ = true;
+Server.main = function() {
 	var express = js.Node.require("express");
 	var app = express.createServer();
 	app["use"](express.static_(js.Node.__dirname + "/public"));
@@ -615,4 +615,4 @@ js.NodeC.FILE_WRITE = "w";
 js.NodeC.FILE_WRITE_APPEND = "a+";
 js.NodeC.FILE_READWRITE = "a";
 js.NodeC.FILE_READWRITE_APPEND = "a+";
-Main.main();
+Server.main();

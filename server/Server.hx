@@ -1,7 +1,7 @@
 package;
 import js.Node;
 
-class Main {
+class Server {
   static function main() {
     //Express
     var express: Dynamic = Node.require("express");

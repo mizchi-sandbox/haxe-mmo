@@ -1,4 +1,4 @@
-package ;
+package;
 
 import js.Lib;
 import EnchantHX;
@@ -8,19 +8,19 @@ class Bear extends HxSprite {
     super(32, 32);
     x = 8;
     y = 8;
-    image = Main.game.assets.get('chara1.gif');
+    image = Client.game.assets.get('chara1.gif');
 
     addEventListener(event_ENTER_FRAME, function(e) {
-      if (Main.game.input.right) {
+      if (Client.game.input.right) {
         x += 2;
       }
-      if (Main.game.input.left) {
+      if (Client.game.input.left) {
         x -= 2;
       }
-      if (Main.game.input.up) {
+      if (Client.game.input.up) {
         y -= 2;
       }
-      if (Main.game.input.down) {
+      if (Client.game.input.down) {
         y += 2;
       }
       
@@ -28,7 +28,7 @@ class Bear extends HxSprite {
   }
 }
  
-class Main extends HxGame {
+class Client extends HxGame {
   public static var game : HxGame;
   public static var socket : Dynamic;
 
@@ -54,7 +54,7 @@ class Main extends HxGame {
     start();
   }
   static function main() {
-    game = new Main();
+    game = new Client();
   }
   
 }

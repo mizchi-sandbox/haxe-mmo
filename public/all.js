@@ -4,215 +4,6 @@ function $extend(from, fields) {
 	for (var name in fields) proto[name] = fields[name];
 	return proto;
 }
-var Dict = function() {
-	this.h = {}
-	if(this.h.__proto__ != null) {
-		this.h.__proto__ = null;
-		delete(this.h.__proto__);
-	}
-};
-Dict.__name__ = true;
-Dict.prototype = {
-	toString: function() {
-		var s = new StringBuf();
-		s.b += Std.string("{");
-		var it = this.keys();
-		while( it.hasNext() ) {
-			var i = it.next();
-			s.b += Std.string(i);
-			s.b += Std.string(" => ");
-			s.b += Std.string(Std.string(this.get(i)));
-			if(it.hasNext()) s.b += Std.string(", ");
-		}
-		s.b += Std.string("}");
-		return s.b;
-	}
-	,iterator: function() {
-		return { ref : this.h, it : this.keys(), hasNext : function() {
-			return this.it.hasNext();
-		}, next : function() {
-			var i = this.it.next();
-			return this.ref[i];
-		}};
-	}
-	,keys: function() {
-		var a = new Array();
-		for(var i in this.h) a.push(i);;
-		return HxOverrides.iter(a);
-	}
-	,remove: function(key) {
-		if(!this.exists(key)) return false;
-		delete(this.h[key]);
-		return true;
-	}
-	,exists: function(key) {
-		return this.h[key] != null;
-	}
-	,get: function(key) {
-		return this.h[key];
-	}
-	,set: function(key,value) {
-		this.h[key] = value;
-	}
-	,__class__: Dict
-}
-var HxEventType = { __ename__ : true, __constructs__ : ["event_LOAD","event_PROGRESS","event_ENTER_FRAME","event_EXIT_FRAME","event_ENTER","event_EXIT","event_ADDED","event_ADDED_TO_SCENE","event_REMOVED","event_REMOVED_FROM_SCENE","event_TOUCH_START","event_TOUCH_MOVE","event_TOUCH_END","event_RENDER","event_INPUT_START","event_INPUT_CHANGE","event_INPUT_END","event_LEFT_BUTTON_DOWN","event_LEFT_BUTTON_UP","event_RIGHT_BUTTON_DOWN","event_RIGHT_BUTTON_UP","event_UP_BUTTON_DOWN","event_UP_BUTTON_UP","event_DOWN_BUTTON_DOWN","event_DOWN_BUTTON_UP","event_A_BUTTON_DOWN","event_A_BUTTON_UP","event_B_BUTTON_DOWN","event_B_BUTTON_UP"] }
-HxEventType.event_LOAD = ["event_LOAD",0];
-HxEventType.event_LOAD.toString = $estr;
-HxEventType.event_LOAD.__enum__ = HxEventType;
-HxEventType.event_PROGRESS = ["event_PROGRESS",1];
-HxEventType.event_PROGRESS.toString = $estr;
-HxEventType.event_PROGRESS.__enum__ = HxEventType;
-HxEventType.event_ENTER_FRAME = ["event_ENTER_FRAME",2];
-HxEventType.event_ENTER_FRAME.toString = $estr;
-HxEventType.event_ENTER_FRAME.__enum__ = HxEventType;
-HxEventType.event_EXIT_FRAME = ["event_EXIT_FRAME",3];
-HxEventType.event_EXIT_FRAME.toString = $estr;
-HxEventType.event_EXIT_FRAME.__enum__ = HxEventType;
-HxEventType.event_ENTER = ["event_ENTER",4];
-HxEventType.event_ENTER.toString = $estr;
-HxEventType.event_ENTER.__enum__ = HxEventType;
-HxEventType.event_EXIT = ["event_EXIT",5];
-HxEventType.event_EXIT.toString = $estr;
-HxEventType.event_EXIT.__enum__ = HxEventType;
-HxEventType.event_ADDED = ["event_ADDED",6];
-HxEventType.event_ADDED.toString = $estr;
-HxEventType.event_ADDED.__enum__ = HxEventType;
-HxEventType.event_ADDED_TO_SCENE = ["event_ADDED_TO_SCENE",7];
-HxEventType.event_ADDED_TO_SCENE.toString = $estr;
-HxEventType.event_ADDED_TO_SCENE.__enum__ = HxEventType;
-HxEventType.event_REMOVED = ["event_REMOVED",8];
-HxEventType.event_REMOVED.toString = $estr;
-HxEventType.event_REMOVED.__enum__ = HxEventType;
-HxEventType.event_REMOVED_FROM_SCENE = ["event_REMOVED_FROM_SCENE",9];
-HxEventType.event_REMOVED_FROM_SCENE.toString = $estr;
-HxEventType.event_REMOVED_FROM_SCENE.__enum__ = HxEventType;
-HxEventType.event_TOUCH_START = ["event_TOUCH_START",10];
-HxEventType.event_TOUCH_START.toString = $estr;
-HxEventType.event_TOUCH_START.__enum__ = HxEventType;
-HxEventType.event_TOUCH_MOVE = ["event_TOUCH_MOVE",11];
-HxEventType.event_TOUCH_MOVE.toString = $estr;
-HxEventType.event_TOUCH_MOVE.__enum__ = HxEventType;
-HxEventType.event_TOUCH_END = ["event_TOUCH_END",12];
-HxEventType.event_TOUCH_END.toString = $estr;
-HxEventType.event_TOUCH_END.__enum__ = HxEventType;
-HxEventType.event_RENDER = ["event_RENDER",13];
-HxEventType.event_RENDER.toString = $estr;
-HxEventType.event_RENDER.__enum__ = HxEventType;
-HxEventType.event_INPUT_START = ["event_INPUT_START",14];
-HxEventType.event_INPUT_START.toString = $estr;
-HxEventType.event_INPUT_START.__enum__ = HxEventType;
-HxEventType.event_INPUT_CHANGE = ["event_INPUT_CHANGE",15];
-HxEventType.event_INPUT_CHANGE.toString = $estr;
-HxEventType.event_INPUT_CHANGE.__enum__ = HxEventType;
-HxEventType.event_INPUT_END = ["event_INPUT_END",16];
-HxEventType.event_INPUT_END.toString = $estr;
-HxEventType.event_INPUT_END.__enum__ = HxEventType;
-HxEventType.event_LEFT_BUTTON_DOWN = ["event_LEFT_BUTTON_DOWN",17];
-HxEventType.event_LEFT_BUTTON_DOWN.toString = $estr;
-HxEventType.event_LEFT_BUTTON_DOWN.__enum__ = HxEventType;
-HxEventType.event_LEFT_BUTTON_UP = ["event_LEFT_BUTTON_UP",18];
-HxEventType.event_LEFT_BUTTON_UP.toString = $estr;
-HxEventType.event_LEFT_BUTTON_UP.__enum__ = HxEventType;
-HxEventType.event_RIGHT_BUTTON_DOWN = ["event_RIGHT_BUTTON_DOWN",19];
-HxEventType.event_RIGHT_BUTTON_DOWN.toString = $estr;
-HxEventType.event_RIGHT_BUTTON_DOWN.__enum__ = HxEventType;
-HxEventType.event_RIGHT_BUTTON_UP = ["event_RIGHT_BUTTON_UP",20];
-HxEventType.event_RIGHT_BUTTON_UP.toString = $estr;
-HxEventType.event_RIGHT_BUTTON_UP.__enum__ = HxEventType;
-HxEventType.event_UP_BUTTON_DOWN = ["event_UP_BUTTON_DOWN",21];
-HxEventType.event_UP_BUTTON_DOWN.toString = $estr;
-HxEventType.event_UP_BUTTON_DOWN.__enum__ = HxEventType;
-HxEventType.event_UP_BUTTON_UP = ["event_UP_BUTTON_UP",22];
-HxEventType.event_UP_BUTTON_UP.toString = $estr;
-HxEventType.event_UP_BUTTON_UP.__enum__ = HxEventType;
-HxEventType.event_DOWN_BUTTON_DOWN = ["event_DOWN_BUTTON_DOWN",23];
-HxEventType.event_DOWN_BUTTON_DOWN.toString = $estr;
-HxEventType.event_DOWN_BUTTON_DOWN.__enum__ = HxEventType;
-HxEventType.event_DOWN_BUTTON_UP = ["event_DOWN_BUTTON_UP",24];
-HxEventType.event_DOWN_BUTTON_UP.toString = $estr;
-HxEventType.event_DOWN_BUTTON_UP.__enum__ = HxEventType;
-HxEventType.event_A_BUTTON_DOWN = ["event_A_BUTTON_DOWN",25];
-HxEventType.event_A_BUTTON_DOWN.toString = $estr;
-HxEventType.event_A_BUTTON_DOWN.__enum__ = HxEventType;
-HxEventType.event_A_BUTTON_UP = ["event_A_BUTTON_UP",26];
-HxEventType.event_A_BUTTON_UP.toString = $estr;
-HxEventType.event_A_BUTTON_UP.__enum__ = HxEventType;
-HxEventType.event_B_BUTTON_DOWN = ["event_B_BUTTON_DOWN",27];
-HxEventType.event_B_BUTTON_DOWN.toString = $estr;
-HxEventType.event_B_BUTTON_DOWN.__enum__ = HxEventType;
-HxEventType.event_B_BUTTON_UP = ["event_B_BUTTON_UP",28];
-HxEventType.event_B_BUTTON_UP.toString = $estr;
-HxEventType.event_B_BUTTON_UP.__enum__ = HxEventType;
-var HxInput = function(inp) {
-	this._input = inp;
-};
-HxInput.__name__ = true;
-HxInput.prototype = {
-	get_down: function() {
-		return this._input.down;
-	}
-	,get_right: function() {
-		return this._input.right;
-	}
-	,get_up: function() {
-		return this._input.up;
-	}
-	,get_left: function() {
-		return this._input.left;
-	}
-	,__class__: HxInput
-}
-var HxAssets = function(assets) {
-	this._assets = assets;
-};
-HxAssets.__name__ = true;
-HxAssets.prototype = {
-	get: function(name) {
-		return this._assets[name];
-	}
-	,__class__: HxAssets
-}
-var HxGame = function(width,height) {
-	this._game = new enchant.Game(width,height);
-	this.input = new HxInput(this._game.input);
-	this.assets = new HxAssets(this._game.assets);
-	this.rootScene = new HxScene(this._game.rootScene);
-};
-HxGame.__name__ = true;
-HxGame.prototype = {
-	end: function(score,msg) {
-		alert(msg);
-	}
-	,getAsset: function(name) {
-		return this._game.assets[name];
-	}
-	,set_onload: function(fn) {
-		return this._game.onload = fn;
-	}
-	,get_onload: function() {
-		return this._game.onload;
-	}
-	,start: function() {
-		this._game.start();
-	}
-	,preload: function(assets) {
-		return this._game.preload(assets);
-	}
-	,setPreloadBase: function(baseurl) {
-		this._preloadBase = baseurl;
-	}
-	,get_frame: function() {
-		return this._game.frame;
-	}
-	,set_fps: function(fps) {
-		return this._game.fps = fps;
-	}
-	,get_fps: function() {
-		return this._game.fps;
-	}
-	,__class__: HxGame
-}
 var HxEventTarget = function(inst) {
 	this._target = inst;
 };
@@ -453,6 +244,270 @@ HxSprite.__super__ = HxSpriteBase;
 HxSprite.prototype = $extend(HxSpriteBase.prototype,{
 	__class__: HxSprite
 });
+var Bear = function() {
+	var _g = this;
+	HxSprite.call(this,32,32);
+	this._node.x = 8;
+	this._node.y = 8;
+	this._sprite.image = Client.game.assets._assets["chara1.gif"];
+	this.addEventListener(HxEventType.event_ENTER_FRAME,function(e) {
+		if(Client.game.input._input.right) {
+			var _g1 = _g;
+			_g1._node.x = _g1._node.x + 2;
+		}
+		if(Client.game.input._input.left) {
+			var _g1 = _g;
+			_g1._node.x = _g1._node.x - 2;
+		}
+		if(Client.game.input._input.up) {
+			var _g1 = _g;
+			_g1._node.y = _g1._node.y - 2;
+		}
+		if(Client.game.input._input.down) {
+			var _g1 = _g;
+			_g1._node.y = _g1._node.y + 2;
+		}
+	});
+};
+Bear.__name__ = true;
+Bear.__super__ = HxSprite;
+Bear.prototype = $extend(HxSprite.prototype,{
+	__class__: Bear
+});
+var HxGame = function(width,height) {
+	this._game = new enchant.Game(width,height);
+	this.input = new HxInput(this._game.input);
+	this.assets = new HxAssets(this._game.assets);
+	this.rootScene = new HxScene(this._game.rootScene);
+};
+HxGame.__name__ = true;
+HxGame.prototype = {
+	end: function(score,msg) {
+		alert(msg);
+	}
+	,getAsset: function(name) {
+		return this._game.assets[name];
+	}
+	,set_onload: function(fn) {
+		return this._game.onload = fn;
+	}
+	,get_onload: function() {
+		return this._game.onload;
+	}
+	,start: function() {
+		this._game.start();
+	}
+	,preload: function(assets) {
+		return this._game.preload(assets);
+	}
+	,setPreloadBase: function(baseurl) {
+		this._preloadBase = baseurl;
+	}
+	,get_frame: function() {
+		return this._game.frame;
+	}
+	,set_fps: function(fps) {
+		return this._game.fps = fps;
+	}
+	,get_fps: function() {
+		return this._game.fps;
+	}
+	,__class__: HxGame
+}
+var Client = function() {
+	var _g = this;
+	HxGame.call(this,320,320);
+	this._game.fps = 24;
+	this._game.preload(["chara1.gif"]);
+	this._game.onload = function() {
+		var window = js.Lib.window;
+		var io = js.Lib.window.io;
+		Client.socket = io.connect("/entrance");
+		Client.socket.emit("login","jdkfsajfkldas");
+		window.socket = Client.socket;
+		var bear = new Bear();
+		_g.rootScene.addChild(bear);
+		_g.rootScene._scene.backgroundColor = "#aaaaaa";
+	};
+	this._game.start();
+};
+Client.__name__ = true;
+Client.main = function() {
+	Client.game = new Client();
+}
+Client.__super__ = HxGame;
+Client.prototype = $extend(HxGame.prototype,{
+	__class__: Client
+});
+var Dict = function() {
+	this.h = {}
+	if(this.h.__proto__ != null) {
+		this.h.__proto__ = null;
+		delete(this.h.__proto__);
+	}
+};
+Dict.__name__ = true;
+Dict.prototype = {
+	toString: function() {
+		var s = new StringBuf();
+		s.b += Std.string("{");
+		var it = this.keys();
+		while( it.hasNext() ) {
+			var i = it.next();
+			s.b += Std.string(i);
+			s.b += Std.string(" => ");
+			s.b += Std.string(Std.string(this.get(i)));
+			if(it.hasNext()) s.b += Std.string(", ");
+		}
+		s.b += Std.string("}");
+		return s.b;
+	}
+	,iterator: function() {
+		return { ref : this.h, it : this.keys(), hasNext : function() {
+			return this.it.hasNext();
+		}, next : function() {
+			var i = this.it.next();
+			return this.ref[i];
+		}};
+	}
+	,keys: function() {
+		var a = new Array();
+		for(var i in this.h) a.push(i);;
+		return HxOverrides.iter(a);
+	}
+	,remove: function(key) {
+		if(!this.exists(key)) return false;
+		delete(this.h[key]);
+		return true;
+	}
+	,exists: function(key) {
+		return this.h[key] != null;
+	}
+	,get: function(key) {
+		return this.h[key];
+	}
+	,set: function(key,value) {
+		this.h[key] = value;
+	}
+	,__class__: Dict
+}
+var HxEventType = { __ename__ : true, __constructs__ : ["event_LOAD","event_PROGRESS","event_ENTER_FRAME","event_EXIT_FRAME","event_ENTER","event_EXIT","event_ADDED","event_ADDED_TO_SCENE","event_REMOVED","event_REMOVED_FROM_SCENE","event_TOUCH_START","event_TOUCH_MOVE","event_TOUCH_END","event_RENDER","event_INPUT_START","event_INPUT_CHANGE","event_INPUT_END","event_LEFT_BUTTON_DOWN","event_LEFT_BUTTON_UP","event_RIGHT_BUTTON_DOWN","event_RIGHT_BUTTON_UP","event_UP_BUTTON_DOWN","event_UP_BUTTON_UP","event_DOWN_BUTTON_DOWN","event_DOWN_BUTTON_UP","event_A_BUTTON_DOWN","event_A_BUTTON_UP","event_B_BUTTON_DOWN","event_B_BUTTON_UP"] }
+HxEventType.event_LOAD = ["event_LOAD",0];
+HxEventType.event_LOAD.toString = $estr;
+HxEventType.event_LOAD.__enum__ = HxEventType;
+HxEventType.event_PROGRESS = ["event_PROGRESS",1];
+HxEventType.event_PROGRESS.toString = $estr;
+HxEventType.event_PROGRESS.__enum__ = HxEventType;
+HxEventType.event_ENTER_FRAME = ["event_ENTER_FRAME",2];
+HxEventType.event_ENTER_FRAME.toString = $estr;
+HxEventType.event_ENTER_FRAME.__enum__ = HxEventType;
+HxEventType.event_EXIT_FRAME = ["event_EXIT_FRAME",3];
+HxEventType.event_EXIT_FRAME.toString = $estr;
+HxEventType.event_EXIT_FRAME.__enum__ = HxEventType;
+HxEventType.event_ENTER = ["event_ENTER",4];
+HxEventType.event_ENTER.toString = $estr;
+HxEventType.event_ENTER.__enum__ = HxEventType;
+HxEventType.event_EXIT = ["event_EXIT",5];
+HxEventType.event_EXIT.toString = $estr;
+HxEventType.event_EXIT.__enum__ = HxEventType;
+HxEventType.event_ADDED = ["event_ADDED",6];
+HxEventType.event_ADDED.toString = $estr;
+HxEventType.event_ADDED.__enum__ = HxEventType;
+HxEventType.event_ADDED_TO_SCENE = ["event_ADDED_TO_SCENE",7];
+HxEventType.event_ADDED_TO_SCENE.toString = $estr;
+HxEventType.event_ADDED_TO_SCENE.__enum__ = HxEventType;
+HxEventType.event_REMOVED = ["event_REMOVED",8];
+HxEventType.event_REMOVED.toString = $estr;
+HxEventType.event_REMOVED.__enum__ = HxEventType;
+HxEventType.event_REMOVED_FROM_SCENE = ["event_REMOVED_FROM_SCENE",9];
+HxEventType.event_REMOVED_FROM_SCENE.toString = $estr;
+HxEventType.event_REMOVED_FROM_SCENE.__enum__ = HxEventType;
+HxEventType.event_TOUCH_START = ["event_TOUCH_START",10];
+HxEventType.event_TOUCH_START.toString = $estr;
+HxEventType.event_TOUCH_START.__enum__ = HxEventType;
+HxEventType.event_TOUCH_MOVE = ["event_TOUCH_MOVE",11];
+HxEventType.event_TOUCH_MOVE.toString = $estr;
+HxEventType.event_TOUCH_MOVE.__enum__ = HxEventType;
+HxEventType.event_TOUCH_END = ["event_TOUCH_END",12];
+HxEventType.event_TOUCH_END.toString = $estr;
+HxEventType.event_TOUCH_END.__enum__ = HxEventType;
+HxEventType.event_RENDER = ["event_RENDER",13];
+HxEventType.event_RENDER.toString = $estr;
+HxEventType.event_RENDER.__enum__ = HxEventType;
+HxEventType.event_INPUT_START = ["event_INPUT_START",14];
+HxEventType.event_INPUT_START.toString = $estr;
+HxEventType.event_INPUT_START.__enum__ = HxEventType;
+HxEventType.event_INPUT_CHANGE = ["event_INPUT_CHANGE",15];
+HxEventType.event_INPUT_CHANGE.toString = $estr;
+HxEventType.event_INPUT_CHANGE.__enum__ = HxEventType;
+HxEventType.event_INPUT_END = ["event_INPUT_END",16];
+HxEventType.event_INPUT_END.toString = $estr;
+HxEventType.event_INPUT_END.__enum__ = HxEventType;
+HxEventType.event_LEFT_BUTTON_DOWN = ["event_LEFT_BUTTON_DOWN",17];
+HxEventType.event_LEFT_BUTTON_DOWN.toString = $estr;
+HxEventType.event_LEFT_BUTTON_DOWN.__enum__ = HxEventType;
+HxEventType.event_LEFT_BUTTON_UP = ["event_LEFT_BUTTON_UP",18];
+HxEventType.event_LEFT_BUTTON_UP.toString = $estr;
+HxEventType.event_LEFT_BUTTON_UP.__enum__ = HxEventType;
+HxEventType.event_RIGHT_BUTTON_DOWN = ["event_RIGHT_BUTTON_DOWN",19];
+HxEventType.event_RIGHT_BUTTON_DOWN.toString = $estr;
+HxEventType.event_RIGHT_BUTTON_DOWN.__enum__ = HxEventType;
+HxEventType.event_RIGHT_BUTTON_UP = ["event_RIGHT_BUTTON_UP",20];
+HxEventType.event_RIGHT_BUTTON_UP.toString = $estr;
+HxEventType.event_RIGHT_BUTTON_UP.__enum__ = HxEventType;
+HxEventType.event_UP_BUTTON_DOWN = ["event_UP_BUTTON_DOWN",21];
+HxEventType.event_UP_BUTTON_DOWN.toString = $estr;
+HxEventType.event_UP_BUTTON_DOWN.__enum__ = HxEventType;
+HxEventType.event_UP_BUTTON_UP = ["event_UP_BUTTON_UP",22];
+HxEventType.event_UP_BUTTON_UP.toString = $estr;
+HxEventType.event_UP_BUTTON_UP.__enum__ = HxEventType;
+HxEventType.event_DOWN_BUTTON_DOWN = ["event_DOWN_BUTTON_DOWN",23];
+HxEventType.event_DOWN_BUTTON_DOWN.toString = $estr;
+HxEventType.event_DOWN_BUTTON_DOWN.__enum__ = HxEventType;
+HxEventType.event_DOWN_BUTTON_UP = ["event_DOWN_BUTTON_UP",24];
+HxEventType.event_DOWN_BUTTON_UP.toString = $estr;
+HxEventType.event_DOWN_BUTTON_UP.__enum__ = HxEventType;
+HxEventType.event_A_BUTTON_DOWN = ["event_A_BUTTON_DOWN",25];
+HxEventType.event_A_BUTTON_DOWN.toString = $estr;
+HxEventType.event_A_BUTTON_DOWN.__enum__ = HxEventType;
+HxEventType.event_A_BUTTON_UP = ["event_A_BUTTON_UP",26];
+HxEventType.event_A_BUTTON_UP.toString = $estr;
+HxEventType.event_A_BUTTON_UP.__enum__ = HxEventType;
+HxEventType.event_B_BUTTON_DOWN = ["event_B_BUTTON_DOWN",27];
+HxEventType.event_B_BUTTON_DOWN.toString = $estr;
+HxEventType.event_B_BUTTON_DOWN.__enum__ = HxEventType;
+HxEventType.event_B_BUTTON_UP = ["event_B_BUTTON_UP",28];
+HxEventType.event_B_BUTTON_UP.toString = $estr;
+HxEventType.event_B_BUTTON_UP.__enum__ = HxEventType;
+var HxInput = function(inp) {
+	this._input = inp;
+};
+HxInput.__name__ = true;
+HxInput.prototype = {
+	get_down: function() {
+		return this._input.down;
+	}
+	,get_right: function() {
+		return this._input.right;
+	}
+	,get_up: function() {
+		return this._input.up;
+	}
+	,get_left: function() {
+		return this._input.left;
+	}
+	,__class__: HxInput
+}
+var HxAssets = function(assets) {
+	this._assets = assets;
+};
+HxAssets.__name__ = true;
+HxAssets.prototype = {
+	get: function(name) {
+		return this._assets[name];
+	}
+	,__class__: HxAssets
+}
 var HxLabel = function(text) {
 	this._label = new enchant.Label(text);
 	HxEntity.call(this,this._label);
@@ -716,61 +771,6 @@ IntIter.prototype = {
 	}
 	,__class__: IntIter
 }
-var Bear = function() {
-	var _g = this;
-	HxSprite.call(this,32,32);
-	this._node.x = 8;
-	this._node.y = 8;
-	this._sprite.image = Main.game.assets._assets["chara1.gif"];
-	this.addEventListener(HxEventType.event_ENTER_FRAME,function(e) {
-		if(Main.game.input._input.right) {
-			var _g1 = _g;
-			_g1._node.x = _g1._node.x + 2;
-		}
-		if(Main.game.input._input.left) {
-			var _g1 = _g;
-			_g1._node.x = _g1._node.x - 2;
-		}
-		if(Main.game.input._input.up) {
-			var _g1 = _g;
-			_g1._node.y = _g1._node.y - 2;
-		}
-		if(Main.game.input._input.down) {
-			var _g1 = _g;
-			_g1._node.y = _g1._node.y + 2;
-		}
-	});
-};
-Bear.__name__ = true;
-Bear.__super__ = HxSprite;
-Bear.prototype = $extend(HxSprite.prototype,{
-	__class__: Bear
-});
-var Main = function() {
-	var _g = this;
-	HxGame.call(this,320,320);
-	this._game.fps = 24;
-	this._game.preload(["chara1.gif"]);
-	this._game.onload = function() {
-		var window = js.Lib.window;
-		var io = js.Lib.window.io;
-		Main.socket = io.connect("/entrance");
-		Main.socket.emit("login","jdkfsajfkldas");
-		window.socket = Main.socket;
-		var bear = new Bear();
-		_g.rootScene.addChild(bear);
-		_g.rootScene._scene.backgroundColor = "#aaaaaa";
-	};
-	this._game.start();
-};
-Main.__name__ = true;
-Main.main = function() {
-	Main.game = new Main();
-}
-Main.__super__ = HxGame;
-Main.prototype = $extend(HxGame.prototype,{
-	__class__: Main
-});
 var Std = function() { }
 Std.__name__ = true;
 Std["is"] = function(v,t) {
@@ -1009,4 +1009,4 @@ if(typeof window != "undefined") {
 		return f(msg,[url + ":" + line]);
 	};
 }
-Main.main();
+Client.main();
