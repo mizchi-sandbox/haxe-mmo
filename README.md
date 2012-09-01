@@ -12,7 +12,7 @@ haxelib install nodejs
 npm install
 ```
 
-## FIX for HaXe
+## Fix Express for HaXe
 
 add this code to node_modules/express/lib/express.js
 

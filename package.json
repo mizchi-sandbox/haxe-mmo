@@ -4,8 +4,8 @@
   "description": "``` haxe build.xml open index.html ```",
   "main": "app.js",
   "dependencies": {
-    "connect": "~2.4.4",
-    "express": "~3.0.0rc4"
+    "express": "2.5.10",
+    "socket.io": "0.9.*"
   },
   "devDependencies": {},
   "scripts": {
