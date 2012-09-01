@@ -1,5 +1,7 @@
 # HaXe MMO
 
+This is my HaXe test project of little MMO implement using HaXe, enchant.js and socket.io.
+
 ## How to run
 
 required libraries
