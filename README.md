@@ -1,15 +1,32 @@
-# HaXe Test
+# HaXe MMO
 
-```
+## How to run
+
+required libraries
+
+```sh
+# haxelib
+haxelib install nodejs
+
+# node
 npm install
-haxe build.xml
-open index.html
 ```
 
-and add this code to node_modules/express/lib/express.js
+## FIX for HaXe
+
+add this code to node_modules/express/lib/express.js
 
 ```
 exports.static_ = exports.static;
 ```
 
 it is to avoid `static` var.
+
+## Build and Start
+
+```
+haxe build.xml
+node app.js
+```
+
+open localhost:3000
