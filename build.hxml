@@ -1,0 +1,12 @@
+# client
+-cp client
+-main Main
+-js public/all.js
+
+--next
+
+# server
+-cp server
+-lib nodejs
+-main Main
+-js app.js

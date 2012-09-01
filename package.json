@@ -1,0 +1,17 @@
+{
+  "name": "enchant-with-server",
+  "version": "0.0.0",
+  "description": "``` haxe build.xml open index.html ```",
+  "main": "app.js",
+  "dependencies": {
+    "connect": "~2.4.4",
+    "express": "~3.0.0rc4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD"
+}
